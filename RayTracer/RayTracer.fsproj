@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>88d659b2-c548-47fc-aa6c-fbcd874a6c69</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>RayTracer</RootNamespace>
+    <AssemblyName>RayTracer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <Name>RayTracer</Name>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <Tailcalls>false</Tailcalls>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\RayTracer.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <Tailcalls>true</Tailcalls>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Release\RayTracer.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Build.Tasks.Core, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
+    <Reference Include="mscorlib" />
+    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Utils\Colour.fsi" />
+    <Compile Include="Utils\Colour.fs" />
+    <Compile Include="Utils\Vector.fsi" />
+    <Compile Include="Utils\Vector.fs" />
+    <Compile Include="Utils\Point.fsi" />
+    <Compile Include="Utils\Point.fs" />
+    <Compile Include="Utils\Types.fs" />
+    <Compile Include="Utils\Texture.fs" />
+    <Compile Include="Utils\Matrix.fsi" />
+    <Compile Include="Utils\Matrix.fs" />
+    <Compile Include="Utils\AffineTransform.fsi" />
+    <Compile Include="Utils\AffineTransform.fs" />
+    <Compile Include="ExprParser\ExprParse.fsi" />
+    <Compile Include="ExprParser\ExprParse.fs" />
+    <Compile Include="ExprParser\ExprToPoly.fsi" />
+    <Compile Include="ExprParser\ExprToPoly.fs" />
+    <Compile Include="ExprParser\PolyEval.fsi" />
+    <Compile Include="ExprParser\PolyEval.fs" />
+    <Compile Include="ExprParser\PolySolve.fsi" />
+    <Compile Include="ExprParser\PolySolve.fs" />
+    <Compile Include="ExprParser\ManyDegree.fsi" />
+    <Compile Include="ExprParser\ManyDegree.fs" />
+    <Compile Include="PlyFileParser\PlyParser.fsi" />
+    <Compile Include="PlyFileParser\PlyParser.fs" />
+    <Compile Include="Shapes\Shape.fs" />
+    <Compile Include="Shapes\BaseShape.fs" />
+    <Compile Include="Shapes\CSG.fs" />
+    <Compile Include="Shapes\KDMeshTree.fsi" />
+    <Compile Include="Shapes\KDMeshTree.fs" />
+    <Compile Include="Shapes\KDShapeTree.fsi" />
+    <Compile Include="Shapes\KDShapeTree.fs" />
+    <Compile Include="Shapes\Mesh.fs" />
+    <Compile Include="Shapes\ImplicitSurfaces.fs" />
+    <Compile Include="AssemblyInfo.fs" />
+    <None Include="App.config" />
+    <Compile Include="RayTracer.fsi" />
+    <Compile Include="RayTracer.fs" />
+    <Compile Include="API.fsi" />
+    <Compile Include="API.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <PropertyGroup>
+    <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Choose>
+    <When Condition="'$(VisualStudioVersion)' == '11.0'">
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\..\Microsoft SDKs\F#\3.0\Framework\v4.0\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets')">
+        <FSharpTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\FSharp\Microsoft.FSharp.Targets</FSharpTargetsPath>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+  <Import Project="$(FSharpTargetsPath)" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
